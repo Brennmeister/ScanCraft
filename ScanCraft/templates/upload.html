@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+{% load crispy_forms_tags %} <!-- For using Bootstrap styles -->
+
+<script src="{% static 'js/dropzone.js'%}"></script>
+
+{% block content %}
+<div class="col-3">
+    {% crispy form %}
+</div>
+{% endblock %}

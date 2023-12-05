@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+
 import dj_database_url
 from decouple import Csv, config
 
@@ -22,12 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY", default="django-insecure$simple.settings.local")
+SECRET_KEY = config(
+    "SECRET_KEY", default="django-insecure$simple.settings.local")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1,localhost", cast=Csv())
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS", default="127.0.0.1,localhost", cast=Csv())
 
 
 # Application definition
@@ -39,6 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap5',
+    'crispy_forms',
+    'crispy_bootstrap5',
+
+    'ScanCraft.apps.accounts',
+    'ScanCraft.apps.core',
 ]
 
 MIDDLEWARE = [
@@ -76,13 +85,14 @@ WSGI_APPLICATION = 'ScanCraft.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
+    #     }
     "default": dj_database_url.config(
         # default=config("DATABASE_URL", default="postgres://ScanCraft:ScanCraft@localhost:5432/ScanCraft"),
-        default=config("DATABASE_URL", default=f"sqlite:///{BASE_DIR.joinpath('db.sqlite3')}"),
+        default=config(
+            "DATABASE_URL", default=f"sqlite:///{BASE_DIR.joinpath('db.sqlite3')}"),
         conn_max_age=600,
     )
 }
@@ -122,12 +132,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 if not DEBUG:
-    STATIC_ROOT = BASE_DIR.joinpath('static')  # only required for production, see https://stackoverflow.com/questions/24022558/differences-between-staticfiles-dir-static-root-and-media-root
+    # only required for production, see https://stackoverflow.com/questions/24022558/differences-between-staticfiles-dir-static-root-and-media-root
+    STATIC_ROOT = BASE_DIR.joinpath('static')
     STATIC_ROOT = '/home/django/www-data/example.com/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR.joinpath('static/'),
-    ]
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -156,7 +167,8 @@ LOGGING = {
 # ==============================================================================
 # THIRD-PARTY SETTINGS
 # ==============================================================================
-
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # ==============================================================================
 # FIRST-PARTY SETTINGS

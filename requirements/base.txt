@@ -5,3 +5,5 @@ fastjsonschema==2.19.0
 dj-database-url==2.1.0
 pytz==2023.3.post1
 python-decouple==3.8
+django-crispy-forms==2.1
+crispy-bootstrap5==2023.10

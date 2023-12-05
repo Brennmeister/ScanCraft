@@ -1,0 +1,15 @@
+{
+    "editor.defaultFormatter": null,
+    "editor.formatOnSave": false,  // enable per language
+    "[python]": {
+     "editor.codeActionsOnSave": {
+       "source.organizeImports": true
+        },
+        "editor.formatOnSave": true
+      },
+ 
+    "python.formatting.provider": "black",
+    "isort.args": ["--profile", "black"],
+    "python.linting.flake8Enabled": true,  
+ }
+ 
