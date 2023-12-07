@@ -1,10 +1,27 @@
 {% extends "base_generic.html" %}
 {% load crispy_forms_tags %} <!-- For using Bootstrap styles -->
 
-<script src="{% static 'js/dropzone.js'%}"></script>
 
 {% block content %}
+<form action="/target" class="dropzone" id="my-dropzone">
+    <div class="col-3" style="min-height:400px; background-color:red">
+        <input type="file" />
+    </div>
+</form>
+
 <div class="col-3">
     {% crispy form %}
 </div>
-{% endblock %}
+<script type="text/javascript">
+    $(function () {
+        window.console.log("dom ready");
+
+        //const myDropzone = new Dropzone("#my-dropzone");
+        let myDropzone = new Dropzone("#my-dropzone");
+        myDropzone.on("addedfile", file => {
+            console.log(`File added: ${file.name}`);
+        });
+        window.console.log(myDropzone);
+    });
+</script >
+        {% endblock %}
